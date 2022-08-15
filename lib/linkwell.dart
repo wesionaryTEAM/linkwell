@@ -229,7 +229,9 @@ class LinkWell extends StatelessWidget {
 
         var l = value.toString().contains('https://')
             ? value
-            : value.toString().contains('http://') ? value : 'http://' + value;
+            : value.toString().contains('http://')
+                ? value
+                : 'http://' + value;
         var name = l;
 
         if (this.listOfNames != null) {
@@ -250,17 +252,21 @@ class LinkWell extends StatelessWidget {
         textSpanWidget.add(link);
       }
 
-      if (wid[1] != '') {
-        if (value == links.last) {
-          var text = TextSpan(
-            text: wid[1],
-            style: style == null ? Helper.defaultTextStyle : style,
-          );
+      if (wid.isNotEmpty && wid.length != 1) {
+        if (wid[1] != '') {
+          if (value == links.last) {
+            var text = TextSpan(
+              text: wid[1],
+              style: style == null ? Helper.defaultTextStyle : style,
+            );
 
-          /// added
-          textSpanWidget.add(text);
+            /// added
+            textSpanWidget.add(text);
+          } else {
+            t = wid[1];
+          }
         } else {
-          t = wid[1];
+          t = "";
         }
       }
     });
